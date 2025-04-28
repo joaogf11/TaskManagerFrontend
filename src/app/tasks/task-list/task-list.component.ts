@@ -24,33 +24,6 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.loadTasks()
   }
-// Verificar se uma tarefa está atrasada
-isOverdue(dueDate: Date): boolean {
-  return new Date(dueDate) < new Date();
-}
-
-// Verificar se uma tarefa está próxima do vencimento (próximos 2 dias)
-isDueSoon(dueDate: Date): boolean {
-  const today = new Date();
-  const due = new Date(dueDate);
-  const twoDaysFromNow = new Date();
-  twoDaysFromNow.setDate(today.getDate() + 2);
-  
-  return due <= twoDaysFromNow && due >= today;
-}
-
-// Reabrir uma tarefa concluída
-reopenTask(task: Task): void {
-  task.isCompleted = false;
-  // Atualize a tarefa no backend
-  this.taskService.updateTask(task).subscribe(() => {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Tarefa reaberta',
-      detail: 'A tarefa foi marcada como pendente novamente'
-    });
-  });
-}
 
   loadTasks(): void {
     this.isLoading = true
