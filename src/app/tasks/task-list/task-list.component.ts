@@ -1,8 +1,8 @@
-import { Component, type OnInit } from "@angular/core"
-import type { MessageService, ConfirmationService } from "primeng/api"
-import type { TaskService } from "../task.service"
-import { type Task, TaskPriority } from "../../models/task.model"
-import type { Table } from "primeng/table"
+import { Component, OnInit } from "@angular/core"
+import { MessageService, ConfirmationService } from "primeng/api"
+import { TaskService } from "../task.service"
+import { Task, TaskPriority } from "../../models/task.model"
+import { Table } from "primeng/table"
 
 @Component({
   selector: "app-task-list",

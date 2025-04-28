@@ -1,62 +1,69 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <p-card header="Register" styleClass="w-full max-w-md shadow-lg">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="p-fluid">
-      <div class="field mb-4">
-        <span class="p-float-label">
-          <input id="username" type="text" pInputText formControlName="username" />
-          <label for="username">Username</label>
-        </span>
-        <small *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="p-error">
-          <div *ngIf="username?.errors?.['required']">Username is required</div>
-          <div *ngIf="username?.errors?.['minlength']">Username must be at least 3 characters</div>
-        </small>
-      </div>
+<div class="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+  <div class="w-full max-w-md">
+    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+      <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Register</h2>
+      
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="space-y-1">
+          <span class="p-float-label w-full">
+            <input id="username" type="text" pInputText formControlName="username" class="w-full" />
+            <label for="username">Username</label>
+          </span>
+          <small *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="p-error text-sm">
+            <div *ngIf="username?.errors?.['required']">Username is required</div>
+            <div *ngIf="username?.errors?.['minlength']">Username must be at least 3 characters</div>
+          </small>
+        </div>
 
-      <div class="field mb-4">
-        <span class="p-float-label">
-          <input id="email" type="email" pInputText formControlName="email" />
-          <label for="email">Email</label>
-        </span>
-        <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="p-error">
-          <div *ngIf="email?.errors?.['required']">Email is required</div>
-          <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-        </small>
-      </div>
+        <div class="space-y-1">
+          <span class="p-float-label w-full">
+            <input id="email" type="email" pInputText formControlName="email" class="w-full" />
+            <label for="email">Email</label>
+          </span>
+          <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="p-error text-sm">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
+          </small>
+        </div>
 
-      <div class="field mb-4">
-        <span class="p-float-label">
-          <p-password id="password" formControlName="password" [toggleMask]="true"></p-password>
-          <label for="password">Password</label>
-        </span>
-        <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="p-error">
-          <div *ngIf="password?.errors?.['required']">Password is required</div>
-          <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters</div>
-        </small>
-      </div>
+        <div class="space-y-1">
+          <span class="p-float-label w-full">
+            <p-password id="password" formControlName="password" [toggleMask]="true" styleClass="w-full"></p-password>
+            <label for="password">Password</label>
+          </span>
+          <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="p-error text-sm">
+            <div *ngIf="password?.errors?.['required']">Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters</div>
+          </small>
+        </div>
 
-      <div class="field mb-4">
-        <span class="p-float-label">
-          <p-password id="confirmPassword" formControlName="confirmPassword" [feedback]="false" [toggleMask]="true"></p-password>
-          <label for="confirmPassword">Confirm Password</label>
-        </span>
-        <small *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="p-error">
-          <div *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</div>
-        </small>
-        <small *ngIf="registerForm.errors?.['passwordMismatch']" class="p-error">
-          Passwords do not match
-        </small>
-      </div>
+        <div class="space-y-1">
+          <span class="p-float-label w-full">
+            <p-password id="confirmPassword" formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" styleClass="w-full"></p-password>
+            <label for="confirmPassword">Confirm Password</label>
+          </span>
+          <small *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="p-error text-sm">
+            <div *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</div>
+          </small>
+          <small *ngIf="registerForm.errors?.['passwordMismatch']" class="p-error text-sm">
+            Passwords do not match
+          </small>
+        </div>
 
-      <div class="flex justify-between items-center mb-4">
-        <p-button type="submit" label="Register" [disabled]="registerForm.invalid || isLoading"></p-button>
-        <a routerLink="/login" class="text-blue-500 hover:underline">Already have an account?</a>
-      </div>
-    </form>
+        <div class="pt-2">
+          <button pButton type="submit" label="Register" class="w-full p-button-primary" [disabled]="registerForm.invalid || isLoading"></button>
+        </div>
+        
+        <div class="text-center pt-2">
+          <a routerLink="/login" class="text-blue-600 hover:text-blue-800 text-sm">Already have an account?</a>
+        </div>
+      </form>
 
-    <div *ngIf="isLoading" class="flex justify-center">
-      <p-progressSpinner></p-progressSpinner>
+      <div *ngIf="isLoading" class="flex justify-center mt-4">
+        <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
+      </div>
     </div>
-  </p-card>
+  </div>
 </div>
 
 <p-toast></p-toast>

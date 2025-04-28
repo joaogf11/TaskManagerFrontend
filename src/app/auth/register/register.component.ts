@@ -1,8 +1,8 @@
-import { Component, type OnInit } from "@angular/core"
-import { type FormBuilder, type FormGroup, Validators } from "@angular/forms"
-import type { Router } from "@angular/router"
-import type { MessageService } from "primeng/api"
-import type { AuthService } from "../auth.service"
+import { Component, OnInit } from "@angular/core"
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { Router } from "@angular/router"
+import { MessageService } from "primeng/api"
+import { AuthService } from "../auth.service"
 
 @Component({
   selector: "app-register",

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core"
-import type { CanActivate, Router, UrlTree } from "@angular/router"
-import type { Observable } from "rxjs"
-import type { AuthService } from "./auth.service"
+import { CanActivate, Router } from "@angular/router"
+import { AuthService } from "./auth.service"
 
 @Injectable({
   providedIn: "root",
@@ -9,10 +8,10 @@ import type { AuthService } from "./auth.service"
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
       return true
     }

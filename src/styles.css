@@ -23,3 +23,188 @@ body {
   background-color: var(--surface-ground);
   color: var(--text-color);
 }
+
+/* Custom Styles */
+.p-datatable {
+  @apply shadow-sm rounded-lg overflow-hidden;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  @apply bg-gray-50 text-gray-700 font-semibold;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  @apply transition-colors duration-150;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  @apply bg-gray-50;
+}
+
+.p-dialog {
+  @apply rounded-lg shadow-lg;
+}
+
+.p-dialog .p-dialog-header {
+  @apply bg-white border-b border-gray-200;
+}
+
+.p-dialog .p-dialog-content {
+  @apply bg-white;
+}
+
+.p-button {
+  @apply transition-all duration-200;
+}
+
+.p-button:not(.p-button-text):not(.p-button-outlined) {
+  @apply shadow-sm hover:shadow;
+}
+
+.p-inputtext {
+  @apply transition-all duration-200;
+}
+
+.p-inputtext:focus {
+  @apply ring-2 ring-blue-500 ring-opacity-50;
+}
+
+.p-dropdown {
+  @apply w-full;
+}
+
+.p-calendar {
+  @apply w-full;
+}
+
+.p-tag {
+  @apply rounded-full px-3 py-1 text-sm font-medium;
+}
+
+.p-tag.p-tag-success {
+  @apply bg-green-100 text-green-800;
+}
+
+.p-tag.p-tag-warning {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+/* Priority badges */
+.priority-high {
+  @apply bg-red-100 text-red-800;
+}
+
+.priority-medium {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.priority-low {
+  @apply bg-blue-100 text-blue-800;
+}
+
+/* Form styles */
+.p-float-label {
+  @apply relative;
+}
+
+.p-float-label input:focus ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-dropdown:focus ~ label,
+.p-float-label .p-dropdown.p-filled ~ label,
+.p-float-label .p-calendar:focus ~ label,
+.p-float-label .p-calendar.p-filled ~ label {
+  @apply text-blue-500;
+}
+
+/* Toast notifications */
+.p-toast {
+  @apply rounded-lg shadow-lg;
+}
+
+.p-toast .p-toast-message {
+  @apply rounded-lg shadow-sm;
+}
+
+.p-toast .p-toast-message-success {
+  @apply bg-green-50 border-green-200 text-green-800;
+}
+
+.p-toast .p-toast-message-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+
+.p-toast .p-toast-message-warn {
+  @apply bg-yellow-50 border-yellow-200 text-yellow-800;
+}
+
+.p-toast .p-toast-message-info {
+  @apply bg-blue-50 border-blue-200 text-blue-800;
+}
+
+/* Auth forms styles */
+.p-password {
+  width: 100% !important;
+  display: flex;
+}
+
+.p-password-input {
+  width: 100% !important;
+}
+
+.p-password .p-inputtext {
+  @apply w-full;
+}
+
+.p-password-panel {
+  @apply shadow-lg rounded-lg;
+}
+
+.p-inputgroup {
+  @apply flex w-full;
+}
+
+/* Improve eye icon positioning on password inputs */
+.p-password-mask {
+  @apply flex items-center;
+}
+
+.p-password .p-password-icon {
+  @apply cursor-pointer p-2;
+}
+
+/* Fix for PrimeNG Password component */
+.p-password, 
+.p-component {
+  width: 100% !important;
+}
+
+/* Make sure all input fields span full width */
+.p-inputtext,
+.p-password-input,
+.p-inputnumber-input {
+  width: 100% !important;
+}
+
+/* Fix PrimeNG panel display */
+.p-panel-content {
+  padding: 1.25rem !important;
+}
+
+/* Fix eye icon problems in password field */
+.p-password-input {
+  padding-right: 2.5rem !important;
+}
+
+/* Make sure authentication forms are well formatted */
+.auth-form-container {
+  @apply p-4 bg-white rounded-lg shadow-lg;
+}
+
+/* Additional fixes for edge cases */
+button.p-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

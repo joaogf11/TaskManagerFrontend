@@ -21,6 +21,7 @@ import { CalendarModule } from "primeng/calendar"
 import { CheckboxModule } from "primeng/checkbox"
 import { MenubarModule } from "primeng/menubar"
 import { ProgressSpinnerModule } from "primeng/progressspinner"
+import { TagModule } from "primeng/tag"
 
 // Components
 import { AppComponent } from "./app.component"
@@ -68,6 +69,7 @@ import { AppRoutingModule } from "./app-routing.module"
     CheckboxModule,
     MenubarModule,
     ProgressSpinnerModule,
+    TagModule,
   ],
   providers: [
     MessageService,

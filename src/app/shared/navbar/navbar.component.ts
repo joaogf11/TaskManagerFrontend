@@ -1,11 +1,11 @@
-import { Component, type OnInit } from "@angular/core"
-import type { Router } from "@angular/router"
-import type { MenuItem } from "primeng/api"
-import type { AuthService } from "../../auth/auth.service"
+import { Component, OnInit } from "@angular/core"
+import { Router } from "@angular/router"
+import { MenuItem } from "primeng/api"
+import { AuthService } from "../../auth/auth.service"
 
 @Component({
   selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
+  templateUrl: "./navbar.component.html"
 })
 export class NavbarComponent implements OnInit {
   items: MenuItem[] = []

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core"
-import type { HttpClient } from "@angular/common/http"
-import type { Observable } from "rxjs"
+import { HttpClient } from "@angular/common/http"
+import { Observable } from "rxjs"
 import { environment } from "../../environments/environment"
-import type { Task } from "../models/task.model"
-import type { CreateTaskRequest } from "../models/create-task-request.model"
-import type { UpdateTaskRequest } from "../models/update-task-request.model"
-import type { ServiceResult } from "../models/service-result.model"
+import { Task } from "../models/task.model"
+import { CreateTaskRequest } from "../models/create-task-request.model"
+import { UpdateTaskRequest } from "../models/update-task-request.model"
+import { ServiceResult } from "../models/service-result.model"
 
 @Injectable({
   providedIn: "root",

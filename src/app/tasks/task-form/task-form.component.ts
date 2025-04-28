@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, type OnChanges, type OnInit, Output, type SimpleChanges } from "@angular/core"
-import { type FormBuilder, type FormGroup, Validators } from "@angular/forms"
-import type { MessageService } from "primeng/api"
-import type { TaskService } from "../task.service"
-import { type Task, TaskPriority } from "../../models/task.model"
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core"
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { MessageService } from "primeng/api"
+import { TaskService } from "../task.service"
+import { Task, TaskPriority } from "../../models/task.model"
 
 @Component({
   selector: "app-task-form",

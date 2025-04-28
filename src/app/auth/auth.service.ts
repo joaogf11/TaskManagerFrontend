@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core"
-import type { HttpClient } from "@angular/common/http"
-import { type Observable, BehaviorSubject } from "rxjs"
+import { HttpClient } from "@angular/common/http"
+import { Observable, BehaviorSubject } from "rxjs"
 import { tap } from "rxjs/operators"
 import { environment } from "../../environments/environment"
-import type { User } from "../models/user.model"
-import type { LoginRequest } from "../models/login-request.model"
-import type { RegisterRequest } from "../models/register-request.model"
-import type { AuthResponse } from "../models/auth-response.model"
+import { User } from "../models/user.model"
+import { LoginRequest } from "../models/login-request.model"
+import { RegisterRequest } from "../models/register-request.model"
+import { AuthResponse } from "../models/auth-response.model"
 
 @Injectable({
   providedIn: "root",
