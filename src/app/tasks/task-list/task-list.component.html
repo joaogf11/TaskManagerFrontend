@@ -1,100 +1,63 @@
-<div class="p-4 md:p-6">
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="text-2xl font-bold">My Tasks</h1>
-    <p-button label="Add Task" icon="pi pi-plus" (onClick)="showAddTaskDialog()"></p-button>
-  </div>
-
-  <div *ngIf="isLoading" class="flex justify-center my-8">
-    <p-progressSpinner></p-progressSpinner>
-  </div>
-
-  <p-table 
-    *ngIf="!isLoading" 
-    [value]="tasks" 
-    [paginator]="true" 
-    [rows]="10" 
-    [responsive]="true"
-    styleClass="p-datatable-sm"
-    [rowHover]="true"
-    [globalFilterFields]="['title', 'description']"
-    emptyMessage="No tasks found">
+<!-- Lista de cards de tarefas -->
+<div *ngIf="!isLoading && tasks.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div *ngFor="let task of tasks" class="task-card bg-surface-card rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 p-5">
+    <div class="flex justify-between mb-3">
+      <span [ngClass]="{
+        'bg-red-100 text-red-700': task.priority === 2,
+        'bg-amber-100 text-amber-700': task.priority === 1,
+        'bg-blue-100 text-blue-700': task.priority === 0
+      }" class="text-xs font-medium py-1 px-2.5 rounded-full">
+        {{ getPriorityLabel(task.priority) }}
+      </span>
+      <p-tag 
+        [value]="task.isCompleted ? 'Concluída' : 'Pendente'" 
+        [severity]="task.isCompleted ? 'success' : 'warning'">
+      </p-tag>
+    </div>
     
-    <ng-template pTemplate="caption">
-      <div class="flex justify-between items-center">
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input pInputText type="text" placeholder="Search tasks..." (input)="applyFilter($event)" />
-        </span>
+    <h3 class="text-lg font-semibold mb-2" [class.line-through]="task.isCompleted" [class.text-gray-500]="task.isCompleted">
+      {{ task.title }}
+    </h3>
+    
+    <p *ngIf="task.description" class="text-gray-600 mb-4 text-sm line-clamp-3">
+      {{ task.description }}
+    </p>
+    
+    <div *ngIf="task.dueDate" class="flex items-center mb-4 text-gray-500 text-sm">
+      <i class="pi pi-calendar mr-2"></i>
+      <span>{{ task.dueDate | date:'longDate' }}</span>
+    </div>
+    
+    <!-- Improved task card footer with better action buttons -->
+    <div class="flex justify-between items-center pt-3 mt-2 border-t border-gray-100">
+      <div class="flex gap-2">
+        <button 
+          pButton 
+          icon="pi pi-check" 
+          class="p-button-rounded p-button-success p-button-sm" 
+          *ngIf="!task.isCompleted"
+          pTooltip="Marcar como concluída"
+          (click)="markAsCompleted(task)">
+        </button>
+        <button 
+          pButton 
+          icon="pi pi-pencil" 
+          class="p-button-rounded p-button-primary p-button-sm" 
+          pTooltip="Editar tarefa"
+          (click)="editTask(task)">
+        </button>
+        <button 
+          pButton 
+          icon="pi pi-trash" 
+          class="p-button-rounded p-button-danger p-button-sm" 
+          pTooltip="Excluir tarefa"
+          (click)="confirmDelete(task)">
+        </button>
       </div>
-    </ng-template>
-    
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
-        <th pSortableColumn="priority">Priority <p-sortIcon field="priority"></p-sortIcon></th>
-        <th pSortableColumn="dueDate">Due Date <p-sortIcon field="dueDate"></p-sortIcon></th>
-        <th pSortableColumn="isCompleted">Status <p-sortIcon field="isCompleted"></p-sortIcon></th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
-    
-    <ng-template pTemplate="body" let-task>
-      <tr>
-        <td>
-          <span [class.line-through]="task.isCompleted">{{ task.title }}</span>
-          <p *ngIf="task.description" class="text-sm text-gray-500 mt-1 truncate max-w-xs">{{ task.description }}</p>
-        </td>
-        <td>
-          <span [ngClass]="{
-            'bg-red-100 text-red-800': task.priority === 2,
-            'bg-yellow-100 text-yellow-800': task.priority === 1,
-            'bg-blue-100 text-blue-800': task.priority === 0
-          }" class="px-2 py-1 rounded-full text-xs font-medium">
-            {{ getPriorityLabel(task.priority) }}
-          </span>
-        </td>
-        <td>
-          <span *ngIf="task.dueDate">{{ task.dueDate | date:'mediumDate' }}</span>
-          <span *ngIf="!task.dueDate">-</span>
-        </td>
-        <td>
-          <p-tag 
-            [value]="task.isCompleted ? 'Completed' : 'Pending'" 
-            [severity]="task.isCompleted ? 'success' : 'warn'">
-          </p-tag>
-        </td>
-        <td>
-          <div class="flex gap-2">
-            <button pButton icon="pi pi-check" class="p-button-rounded p-button-success p-button-sm" 
-              *ngIf="!task.isCompleted"
-              (click)="markAsCompleted(task)"></button>
-            <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-primary p-button-sm" 
-              (click)="editTask(task)"></button>
-            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm" 
-              (click)="confirmDelete(task)"></button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <span *ngIf="task.isCompleted" class="flex items-center gap-1 text-green-600 text-xs font-medium">
+        <i class="pi pi-check-circle"></i>
+        Concluída
+      </span>
+    </div>
+  </div>
 </div>
-
-<!-- Task Form Dialog -->
-<p-dialog 
-  [(visible)]="displayTaskDialog" 
-  [header]="editMode ? 'Edit Task' : 'Add Task'" 
-  [modal]="true" 
-  [style]="{width: '450px'}"
-  [draggable]="false" 
-  [resizable]="false">
-  
-  <app-task-form 
-    [task]="selectedTask" 
-    [editMode]="editMode"
-    (onSave)="onTaskSaved($event)"
-    (onCancel)="hideDialog()">
-  </app-task-form>
-</p-dialog>
-
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-toast></p-toast>

@@ -1,14 +1,65 @@
-<p-menubar [model]="items" styleClass="border-b shadow-sm">
+<p-menubar [model]="items" styleClass="shadow-sm border-0 py-2">
   <ng-template pTemplate="start">
-    <div class="flex items-center">
-      <i class="pi pi-check-square text-xl mr-2"></i>
-      <span class="text-xl font-bold">Task Manager</span>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500 shadow-sm">
+        <i class="pi pi-check-square text-xl text-white"></i>
+      </div>
+      <span class="text-xl font-bold text-gray-800 hidden sm:block">Task Manager</span>
     </div>
   </ng-template>
   <ng-template pTemplate="end">
-    <div *ngIf="isLoggedIn" class="flex items-center">
-      <span class="mr-2">{{ username }}</span>
-      <p-button icon="pi pi-sign-out" (onClick)="logout()" styleClass="p-button-text"></p-button>
+    <div *ngIf="isLoggedIn" class="flex items-center gap-3">
+      <!-- User info button -->
+      <button pButton pRipple type="button" 
+        class="p-button-text p-button-rounded flex items-center gap-2" 
+        >
+        <div class="flex items-center gap-2 bg-indigo-50 py-1.5 px-3 rounded-full text-sm text-indigo-700 font-medium">
+          <i class="pi pi-user"></i>
+          <span class="hidden sm:inline">{{ username }}</span>
+        </div>
+      </button>
+      
+      <!-- Notifications -->
+      <button pButton pRipple type="button" 
+        icon="pi pi-bell" 
+        class="p-button-rounded p-button-text relative"
+        pTooltip="Notificações" 
+        tooltipPosition="bottom">
+        <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+      </button>
+      
+      <!-- Settings -->
+      <button pButton pRipple type="button" 
+        icon="pi pi-cog" 
+        class="p-button-rounded p-button-text"
+        pTooltip="Configurações" 
+        tooltipPosition="bottom">
+      </button>
+      
+      <!-- Logout button -->
+      <button pButton pRipple type="button" 
+        icon="pi pi-sign-out" 
+        class="p-button-rounded p-button-danger p-button-text"
+        pTooltip="Sair" 
+        tooltipPosition="bottom"
+        (click)="logout()">
+      </button>
+    </div>
+    
+    <!-- Login/Register buttons if not logged in -->
+    <div *ngIf="!isLoggedIn" class="flex items-center gap-2">
+      <p-button 
+        label="Entrar" 
+        icon="pi pi-sign-in" 
+        styleClass="p-button-sm p-button-text"
+        routerLink="/login">
+      </p-button>
+      <p-button 
+        label="Registrar" 
+        icon="pi pi-user-plus" 
+        styleClass="p-button-sm"
+        routerLink="/register">
+      </p-button>
     </div>
   </ng-template>
 </p-menubar>

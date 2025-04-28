@@ -1,33 +1,88 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-  <div class="max-w-3xl w-full text-center">
-    <h1 class="text-4xl font-bold mb-4">Welcome to Task Manager</h1>
-    <p class="text-xl mb-8">A simple and efficient way to manage your daily tasks</p>
+<div class="welcome-container min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 py-12 px-6">
+  <div class="welcome-card max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bem-vindo ao Task Manager</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">A forma mais simples e eficiente de gerenciar suas tarefas diárias</p>
+    </div>
     
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="flex flex-col items-center p-4 border rounded-lg">
-          <i class="pi pi-check-circle text-4xl text-green-500 mb-4"></i>
-          <h2 class="text-xl font-semibold mb-2">Stay Organized</h2>
-          <p class="text-center">Keep track of all your tasks in one place</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="feature-card bg-indigo-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+        <div class="flex justify-center mb-4">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
+            <i class="pi pi-check-circle text-2xl text-indigo-600"></i>
+          </div>
         </div>
-        
-        <div class="flex flex-col items-center p-4 border rounded-lg">
-          <i class="pi pi-calendar text-4xl text-blue-500 mb-4"></i>
-          <h2 class="text-xl font-semibold mb-2">Set Due Dates</h2>
-          <p class="text-center">Never miss a deadline with task due dates</p>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">Fique Organizado</h2>
+        <p class="text-gray-600">Mantenha todas as suas tarefas organizadas em um só lugar com facilidade e praticidade</p>
+      </div>
+      
+      <div class="feature-card bg-blue-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+        <div class="flex justify-center mb-4">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+            <i class="pi pi-calendar text-2xl text-blue-600"></i>
+          </div>
         </div>
-        
-        <div class="flex flex-col items-center p-4 border rounded-lg">
-          <i class="pi pi-flag text-4xl text-red-500 mb-4"></i>
-          <h2 class="text-xl font-semibold mb-2">Prioritize</h2>
-          <p class="text-center">Set priorities to focus on what matters most</p>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">Defina Prazos</h2>
+        <p class="text-gray-600">Nunca mais perca um prazo com datas de vencimento claras e notificações</p>
+      </div>
+      
+      <div class="feature-card bg-purple-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+        <div class="flex justify-center mb-4">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
+            <i class="pi pi-flag text-2xl text-purple-600"></i>
+          </div>
         </div>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">Priorize</h2>
+        <p class="text-gray-600">Defina prioridades para focar no que realmente importa e aumente sua produtividade</p>
       </div>
     </div>
     
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <p-button label="Get Started" icon="pi pi-user-plus" styleClass="p-button-lg" routerLink="/register"></p-button>
-      <p-button label="Login" icon="pi pi-sign-in" styleClass="p-button-outlined p-button-lg" routerLink="/login"></p-button>
+    <div class="flex flex-col sm:flex-row gap-5 justify-center">
+      <p-button 
+        label="Começar Agora" 
+        icon="pi pi-user-plus" 
+        styleClass="p-button-lg p-button-raised" 
+        routerLink="/register">
+      </p-button>
+      <p-button 
+        label="Entrar" 
+        icon="pi pi-sign-in" 
+        styleClass="p-button-outlined p-button-lg" 
+        routerLink="/login">
+      </p-button>
+    </div>
+    
+    <!-- Added testimonial section -->
+    <div class="mt-16 pt-8 border-t border-gray-100">
+      <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">O que nossos usuários dizem</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="text-amber-500 flex">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+            </div>
+          </div>
+          <p class="italic text-gray-600 mb-4">"Este aplicativo simplificou completamente minha rotina diária. Agora consigo acompanhar todas as minhas tarefas sem estresse."</p>
+          <p class="font-medium">Carlos Silva</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="text-amber-500 flex">
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+            </div>
+          </div>
+          <p class="italic text-gray-600 mb-4">"A melhor ferramenta de gerenciamento de tarefas que já usei. Interface intuitiva e recursos poderosos!"</p>
+          <p class="font-medium">Ana Oliveira</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

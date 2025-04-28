@@ -1,44 +1,75 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-50 p-4">
-  <div class="w-full max-w-md">
-    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-      <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h2>
-      
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <div class="space-y-1">
-          <span class="p-float-label w-full">
-            <input id="email" type="email" pInputText formControlName="email" class="w-full" />
-            <label for="email">Email</label>
-          </span>
-          <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="p-error text-sm">
-            <div *ngIf="email?.errors?.['required']">Email is required</div>
-            <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-          </small>
+<!-- Login Form -->
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-primary-50 to-primary-100 p-6">
+  <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md border border-primary-200">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Entrar</h2>
+      <p class="text-gray-600 mt-2">Acesse sua conta para gerenciar suas tarefas</p>
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="space-y-1">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <div class="relative">
+          <i class="pi pi-envelope absolute text-gray-400 top-1/2 left-3 transform -translate-y-1/2"></i>
+          <input 
+            id="email" 
+            type="email" 
+            pInputText 
+            formControlName="email" 
+            class="w-full pl-10 rounded-lg" 
+            placeholder="seu@email.com"
+          />
         </div>
-
-        <div class="space-y-1">
-          <span class="p-float-label w-full">
-            <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true" styleClass="w-full"></p-password>
-            <label for="password">Password</label>
-          </span>
-          <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="p-error text-sm">
-            <div *ngIf="password?.errors?.['required']">Password is required</div>
-          </small>
-        </div>
-
-        <div class="pt-2">
-          <button pButton type="submit" label="Login" class="w-full p-button-primary" [disabled]="loginForm.invalid || isLoading"></button>
-        </div>
-        
-        <div class="text-center pt-2">
-          <a routerLink="/register" class="text-blue-600 hover:text-blue-800 text-sm">Don't have an account?</a>
-        </div>
-      </form>
-
-      <div *ngIf="isLoading" class="flex justify-center mt-4">
-        <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
+        <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="p-error text-sm">
+          <div *ngIf="email?.errors?.['required']">Email é obrigatório</div>
+          <div *ngIf="email?.errors?.['email']">Por favor, insira um email válido</div>
+        </small>
       </div>
+
+      <div class="space-y-1">
+        <div class="flex justify-between items-center mb-1">
+          <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+          <a href="#" class="text-xs text-primary hover:underline">Esqueceu a senha?</a>
+        </div>
+        <div class="relative">
+          <i class="pi pi-lock absolute text-gray-400 top-1/2 left-3 transform -translate-y-1/2 z-10"></i>
+          <p-password 
+            id="password" 
+            formControlName="password" 
+            [feedback]="false" 
+            [toggleMask]="true" 
+            styleClass="w-full" 
+            [inputStyleClass]="'pl-10 w-full rounded-lg'"
+            placeholder="Sua senha"
+          ></p-password>
+        </div>
+        <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="p-error text-sm">
+          <div *ngIf="password?.errors?.['required']">Senha é obrigatória</div>
+        </small>
+      </div>
+    
+      <div class="pt-4">
+        <button 
+          pButton 
+          type="submit" 
+          label="Entrar" 
+          icon="pi pi-sign-in" 
+          iconPos="left"
+          class="w-full p-button-primary p-button-raised p-button-lg" 
+          [disabled]="loginForm.invalid || isLoading"
+        ></button>
+      </div>
+      
+      <div class="text-center pt-4">
+        <p class="text-gray-600">
+          Não tem uma conta? 
+          <a routerLink="/register" class="text-primary font-medium hover:underline">Registre-se</a>
+        </p>
+      </div>
+    </form>
+
+    <div *ngIf="isLoading" class="flex justify-center mt-8">
+      <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
     </div>
   </div>
 </div>
-
-<p-toast></p-toast>

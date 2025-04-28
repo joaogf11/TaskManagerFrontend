@@ -2,35 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-/* PrimeNG Theme Overrides */
+/* Modern color scheme */
 :root {
-  --primary-color: #3b82f6;
-  --primary-color-hover: #2563eb;
-  --surface-ground: #f3f4f6;
+  /* Esquema de cores monocromático */
+  --primary-color: #5151F9;
+  --primary-color-hover: #4040E5;
+  --primary-color-light: #DEDEFF;
+  --primary-color-ultralight: #F3F3FF;
+  --surface-ground: #f8fafc;
   --surface-section: #ffffff;
   --surface-card: #ffffff;
   --surface-overlay: #ffffff;
-  --surface-border: #e5e7eb;
-  --text-color: #1f2937;
-  --text-color-secondary: #6b7280;
+  --surface-border: #E2E4F3;
+  --text-color: #1e293b;
+  --text-color-secondary: #64748b;
+  --input-bg: #ECEDF5;
+  --input-border: #D7D9E8;
+  --input-focus-border: #5151F9;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  
+  /* Borders */
+  --border-radius: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-sm: 0.375rem;
+  --border-radius-full: 9999px;
+}
+
+/* Tema escuro opcional */
+.dark-theme {
+  --primary-color: #5151F9;
+  --primary-color-hover: #6060FF;
+  --primary-color-light: #2D2D7A;
+  --primary-color-ultralight: #1E1E4F;
+  --surface-ground: #0f172a;
+  --surface-section: #1e293b;
+  --surface-card: #1e293b;
+  --surface-overlay: #1e293b;
+  --surface-border: #334155;
+  --text-color: #f8fafc;
+  --text-color-secondary: #cbd5e1;
+  --input-bg: #1e293b;
+  --input-border: #334155;
+  --input-focus-border: #5151F9;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--surface-ground);
   color: var(--text-color);
+  line-height: 1.5;
 }
 
-/* Custom Styles */
+/* Layout improvements */
+.container {
+  @apply px-5 mx-auto;
+  max-width: 1280px;
+  width: 100%;
+}
+
+/* Improved Datatable */
 .p-datatable {
-  @apply shadow-sm rounded-lg overflow-hidden;
+  @apply shadow-md rounded-lg overflow-hidden border border-gray-200;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.p-datatable .p-datatable-header {
+  @apply bg-white border-b p-4;
+  border-color: var(--surface-border);
 }
 
 .p-datatable .p-datatable-thead > tr > th {
-  @apply bg-gray-50 text-gray-700 font-semibold;
+  @apply bg-gray-50 text-gray-700 font-semibold py-4 px-6 border-b;
+  border-color: var(--surface-border);
+  font-size: 0.875rem;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  @apply py-4 px-6 border-b;
+  border-color: var(--surface-border);
 }
 
 .p-datatable .p-datatable-tbody > tr {
@@ -38,45 +95,169 @@ body {
 }
 
 .p-datatable .p-datatable-tbody > tr:hover {
-  @apply bg-gray-50;
+  @apply bg-opacity-40;
+  background-color: var(--primary-color-ultralight);
 }
 
+.p-datatable .p-paginator {
+  @apply py-3 px-6 bg-white border-t;
+  border-color: var(--surface-border);
+}
+
+.p-datatable .p-paginator .p-paginator-page.p-highlight {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+/* Enhanced Dialog */
 .p-dialog {
-  @apply rounded-lg shadow-lg;
+  @apply rounded-xl overflow-hidden shadow-xl;
+  min-width: 30vw;
 }
 
 .p-dialog .p-dialog-header {
-  @apply bg-white border-b border-gray-200;
+  @apply bg-white border-b py-5 px-6;
+  border-color: var(--surface-border);
+}
+
+.p-dialog .p-dialog-title {
+  @apply text-xl font-semibold;
+  color: var(--text-color);
 }
 
 .p-dialog .p-dialog-content {
-  @apply bg-white;
+  @apply bg-white p-6;
 }
 
+.p-dialog .p-dialog-footer {
+  @apply px-6 py-4 border-t;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--surface-border);
+}
+
+/* Improved Buttons */
 .p-button {
-  @apply transition-all duration-200;
+  @apply transition-all duration-200 font-medium;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.25rem;
+  width: auto !important;
 }
 
-.p-button:not(.p-button-text):not(.p-button-outlined) {
+.p-button:not(.p-button-text):not(.p-button-outlined):not(.p-button-link) {
   @apply shadow-sm hover:shadow;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: var(--border-radius);
 }
 
+.p-button:not(.p-button-text):not(.p-button-outlined):not(.p-button-link):hover {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+}
+
+.p-button-text {
+  @apply text-gray-700 hover:bg-gray-100;
+  border-radius: var(--border-radius);
+}
+
+.p-button-sm {
+  @apply text-xs px-3 py-1.5 rounded;
+  border-radius: var(--border-radius-sm);
+}
+
+.p-button-lg {
+  @apply text-base px-6 py-3;
+  border-radius: var(--border-radius);
+}
+
+.p-button-rounded {
+  @apply rounded-full;
+}
+
+.p-button-icon-only {
+  @apply p-2.5;
+  border-radius: var(--border-radius-full);
+}
+
+/* Improved Form Controls */
 .p-inputtext {
-  @apply transition-all duration-200;
+  @apply transition-all duration-200 border rounded-md;
+  padding: 0.75rem 1rem;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  border-radius: var(--border-radius);
+  width: 100% !important;
+  height: 46px;
 }
 
 .p-inputtext:focus {
-  @apply ring-2 ring-blue-500 ring-opacity-50;
+  @apply ring-2 ring-opacity-50 border outline-none;
+  box-shadow: none;
+  border-color: var(--input-focus-border);
+  ring-color: var(--primary-color);
 }
 
+/* Dropdown and Select improvements */
 .p-dropdown {
-  @apply w-full;
+  @apply border rounded-md;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  border-radius: var(--border-radius);
+  width: 100% !important;
+  height: 46px;
 }
 
+.p-dropdown:not(.p-disabled).p-focus {
+  @apply ring-2 ring-opacity-50 border outline-none;
+  box-shadow: none;
+  border-color: var(--input-focus-border);
+  ring-color: var(--primary-color);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+/* Calendar */
 .p-calendar {
-  @apply w-full;
+  width: 100% !important;
+  display: inline-flex;
 }
 
+.p-calendar .p-inputtext {
+  width: 100% !important;
+  height: 46px;
+  flex: 1;
+}
+
+.p-calendar .p-button {
+  height: 46px;
+}
+
+.p-calendar-w-btn .p-datepicker-trigger {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  height: 46px;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--input-border);
+  width: 3rem !important;
+}
+
+.p-datepicker .p-datepicker-header {
+  @apply bg-white border-b px-4 py-3;
+  border-color: var(--surface-border);
+  margin-bottom: 0.5rem;
+}
+
+.p-datepicker table td > span.p-highlight {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+/* Tags and Badges */
 .p-tag {
   @apply rounded-full px-3 py-1 text-sm font-medium;
 }
@@ -85,46 +266,47 @@ body {
   @apply bg-green-100 text-green-800;
 }
 
-.p-tag.p-tag-warning {
-  @apply bg-yellow-100 text-yellow-800;
+.p-tag.p-tag-warn {
+  @apply bg-amber-100 text-amber-800;
 }
 
-/* Priority badges */
-.priority-high {
+.p-tag.p-tag-danger {
   @apply bg-red-100 text-red-800;
 }
 
-.priority-medium {
-  @apply bg-yellow-100 text-yellow-800;
-}
-
-.priority-low {
+.p-tag.p-tag-info {
   @apply bg-blue-100 text-blue-800;
 }
 
-/* Form styles */
-.p-float-label {
-  @apply relative;
+/* Priority badges with improved styling */
+.priority-high {
+  @apply border rounded-full px-3 py-1;
+  background-color: #FFECEA;
+  color: #E5484D;
+  border-color: #FFCDC9;
 }
 
-.p-float-label input:focus ~ label,
-.p-float-label input.p-filled ~ label,
-.p-float-label textarea:focus ~ label,
-.p-float-label textarea.p-filled ~ label,
-.p-float-label .p-dropdown:focus ~ label,
-.p-float-label .p-dropdown.p-filled ~ label,
-.p-float-label .p-calendar:focus ~ label,
-.p-float-label .p-calendar.p-filled ~ label {
-  @apply text-blue-500;
+.priority-medium {
+  @apply border rounded-full px-3 py-1;
+  background-color: #FFF8C5;
+  color: #F59E0B;
+  border-color: #FEF3C7;
+}
+
+.priority-low {
+  @apply border rounded-full px-3 py-1;
+  background-color: var(--primary-color-ultralight);
+  color: var(--primary-color);
+  border-color: var(--primary-color-light);
 }
 
 /* Toast notifications */
 .p-toast {
-  @apply rounded-lg shadow-lg;
+  @apply rounded-lg shadow-xl;
 }
 
 .p-toast .p-toast-message {
-  @apply rounded-lg shadow-sm;
+  @apply rounded-lg shadow-md border;
 }
 
 .p-toast .p-toast-message-success {
@@ -136,14 +318,53 @@ body {
 }
 
 .p-toast .p-toast-message-warn {
-  @apply bg-yellow-50 border-yellow-200 text-yellow-800;
+  @apply bg-amber-50 border-amber-200 text-amber-800;
 }
 
 .p-toast .p-toast-message-info {
   @apply bg-blue-50 border-blue-200 text-blue-800;
 }
 
-/* Auth forms styles */
+/* Auth forms styling */
+.auth-container {
+  @apply flex justify-center items-center min-h-screen p-4;
+  background-color: var(--primary-color-ultralight);
+  width: 100%;
+}
+
+.auth-card {
+  @apply bg-white rounded-xl shadow-xl border p-8 w-full max-w-md;
+  border-color: var(--surface-border);
+}
+
+.auth-title {
+  @apply text-2xl font-bold text-center mb-8;
+  color: var(--text-color);
+}
+
+/* Welcome page styling */
+.welcome-container {
+  @apply flex flex-col items-center justify-center min-h-screen p-6;
+  background-color: var(--primary-color-ultralight);
+  width: 100%;
+}
+
+.welcome-card {
+  @apply max-w-5xl w-full bg-white rounded-2xl shadow-lg border p-10 mb-10;
+  border-color: var(--surface-border);
+}
+
+.welcome-title {
+  @apply text-4xl md:text-5xl font-bold text-center mb-4;
+  color: var(--text-color);
+}
+
+.welcome-subtitle {
+  @apply text-xl text-center mb-12;
+  color: var(--text-color-secondary);
+}
+
+/* Password component fixes */
 .p-password {
   width: 100% !important;
   display: flex;
@@ -151,60 +372,1106 @@ body {
 
 .p-password-input {
   width: 100% !important;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  height: 46px !important;
 }
 
-.p-password .p-inputtext {
-  @apply w-full;
-}
-
-.p-password-panel {
-  @apply shadow-lg rounded-lg;
-}
-
+/* Input group styling */
 .p-inputgroup {
   @apply flex w-full;
 }
 
-/* Improve eye icon positioning on password inputs */
-.p-password-mask {
-  @apply flex items-center;
+.p-inputgroup-addon {
+  @apply border px-3 flex items-center text-gray-500;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--input-border);
 }
 
-.p-password .p-password-icon {
-  @apply cursor-pointer p-2;
+/* Card styling */
+.task-card {
+  @apply bg-white rounded-xl shadow-sm border p-5 mb-4 hover:shadow-md transition-shadow;
+  border-color: var(--surface-border);
 }
 
-/* Fix for PrimeNG Password component */
-.p-password, 
+.task-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.task-card-description {
+  @apply mb-4;
+  color: var(--text-color-secondary);
+}
+
+.task-card-footer {
+  @apply flex justify-between items-center pt-4 border-t;
+  border-color: var(--surface-border);
+}
+
+.p-card {
+  @apply rounded-xl shadow-md border overflow-hidden;
+  border-color: var(--surface-border);
+  width: 100%;
+}
+
+.p-card .p-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.p-card .p-card-subtitle {
+  @apply text-sm mb-4;
+  color: var(--text-color-secondary);
+}
+
+.p-card .p-card-content {
+  @apply p-4;
+}
+
+.p-card .p-card-footer {
+  @apply p-4 border-t;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--surface-border);
+}
+
+/* Menu and Navbar */
+.p-menubar {
+  @apply bg-white border-b px-4 py-2;
+  border-color: var(--surface-border);
+  width: 100%;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+  @apply text-gray-700 hover:text-indigo-700 px-3 py-2 rounded-md hover:bg-gray-50;
+  border-radius: var(--border-radius);
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+  @apply text-gray-500 mr-2;
+}
+
+/* Fix for the menubar on mobile */
+@media (max-width: 640px) {
+  .p-menubar .p-menubar-button {
+    @apply text-gray-700;
+  }
+  
+  .p-menubar-root-list {
+    @apply bg-white shadow-lg border border-gray-200 rounded-md;
+  }
+}
+
+/* Home page feature cards */
+.feature-card {
+  @apply flex flex-col items-center p-6 border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 bg-white;
+  border-color: var(--surface-border);
+}
+
+.feature-card-icon {
+  @apply text-4xl mb-4;
+  color: var(--primary-color);
+}
+
+.feature-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.feature-card-text {
+  @apply text-center;
+  color: var(--text-color-secondary);
+}
+
+/* App container with proper spacing */
+.app-container {
+  @apply min-h-screen flex flex-col;
+  width: 100%;
+}
+
+.app-content {
+  @apply flex-grow p-5 md:p-8 lg:p-10;
+  width: 100%;
+}
+
+/* Error messages */
+.p-error {
+  @apply text-red-600 text-sm mt-1;
+}
+
+/* Checkbox styling */
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  @apply ring-2 ring-opacity-50 border;
+  border-color: var(--primary-color);
+}
+
+/* Progress spinner */
+.p-progressspinner {
+  color: var(--primary-color);
+}
+
+/* Fix for PrimeNG components */
 .p-component {
   width: 100% !important;
 }
 
-/* Make sure all input fields span full width */
 .p-inputtext,
 .p-password-input,
 .p-inputnumber-input {
   width: 100% !important;
 }
 
-/* Fix PrimeNG panel display */
+/* Horizontal tabs */
+.p-tabview .p-tabview-nav {
+  @apply border-b;
+  border-color: var(--surface-border);
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-white text-gray-700 border-b-2 border-transparent py-3 px-4;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Fix for panel display */
 .p-panel-content {
   padding: 1.25rem !important;
 }
 
-/* Fix eye icon problems in password field */
-.p-password-input {
-  padding-right: 2.5rem !important;
+/* Styles for dark theme */
+.dark-theme .app-content {
+  @apply bg-gray-900;
 }
 
-/* Make sure authentication forms are well formatted */
-.auth-form-container {
-  @apply p-4 bg-white rounded-lg shadow-lg;
+.dark-theme .p-datatable {
+  @apply border-gray-700;
 }
 
-/* Additional fixes for edge cases */
-button.p-element {
+.dark-theme .p-datatable .p-datatable-thead > tr > th {
+  @apply bg-gray-800 text-gray-200 border-gray-700;
+}
+
+.dark-theme .p-datatable .p-datatable-tbody > tr > td {
+  @apply border-gray-700 text-gray-300;
+}
+
+.dark-theme .p-datatable .p-datatable-tbody > tr:hover {
+  @apply bg-gray-800;
+}
+
+/* Utility classes */
+.bg-pattern {
+  background-color: var(--surface-ground);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235151f9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.search-input {
+  @apply py-3 px-4 rounded-lg border w-full transition-all duration-200;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+.search-input:focus {
+  @apply outline-none ring-2 ring-opacity-50;
+  border-color: var(--input-focus-border);
+  ring-color: var(--primary-color);
+}
+
+/* Labels acima dos inputs */
+.form-field {
+  @apply mb-6;
+  width: 100%;
+}
+
+.form-field label {
+  @apply block text-sm font-medium mb-2;
+  color: var(--text-color-secondary);
+}
+
+/* Remover o estilo floating label */
+.p-float-label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.p-float-label input:focus ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-dropdown:focus ~ label,
+.p-float-label .p-dropdown.p-filled ~ label,
+.p-float-label .p-calendar:focus ~ label,
+.p-float-label .p-calendar.p-filled ~ label {
+  top: -0.75rem;
+  font-size: 12px;
+  background-color: white;
+  padding: 2px 4px;
+  left: 0.5rem;
+  color: var(--primary-color);
+}
+
+.p-float-label label {
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+/* Dropdown e Select aprimorados */
+.p-dropdown {
+  @apply border rounded-md;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  border-radius: var(--border-radius);
+  width: 100% !important;
+  height: 46px;
+}
+
+.p-dropdown .p-dropdown-label {
+  padding: 0.75rem 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.p-dropdown-panel {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--input-border);
+  width: auto !important;
+  min-width: 100%;
+  z-index: 999 !important;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  @apply ring-2 ring-opacity-50 border outline-none;
+  box-shadow: none;
+  border-color: var(--input-focus-border);
+  ring-color: var(--primary-color);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0.5rem 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.75rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: var(--border-radius-sm);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background-color: var(--primary-color-ultralight);
+}
+
+/* Calendário totalmente reformulado */
+.p-calendar {
+  width: 100% !important;
+  display: inline-flex;
+}
+
+.p-calendar .p-inputtext {
+  width: 100% !important;
+  height: 46px;
+  flex: 1;
+}
+
+.p-calendar .p-button {
+  height: 46px;
+}
+
+.p-calendar-w-btn .p-datepicker-trigger {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  height: 46px;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--input-border);
+  width: 3rem !important;
+}
+
+.p-datepicker {
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--input-border);
+  z-index: 999 !important;
+}
+
+.p-datepicker .p-datepicker-header {
+  @apply bg-white border-b px-4 py-3;
+  border-color: var(--surface-border);
+  margin-bottom: 0.5rem;
+}
+
+.p-datepicker table {
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.p-datepicker table th {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+}
+
+.p-datepicker table td {
+  padding: 0.3rem;
+}
+
+.p-datepicker table td > span {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.p-datepicker table td > span:hover {
+  background-color: var(--primary-color-ultralight);
+}
+
+.p-datepicker table td > span.p-highlight {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  border: 1px solid var(--primary-color-light);
+}
+
+.p-datepicker .p-datepicker-buttonbar {
+  border-top: 1px solid var(--surface-border);
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Botões de ação no calendário */
+.p-datepicker .p-datepicker-buttonbar .p-button {
+  width: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Mobile overlay para calendário */
+.p-datepicker-mobile-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Tags e Emblemas */
+.p-tag {
+  @apply rounded-full px-3 py-1 text-sm font-medium;
+}
+
+.p-tag.p-tag-success {
+  @apply bg-green-100 text-green-800;
+}
+
+.p-tag.p-tag-warn {
+  @apply bg-amber-100 text-amber-800;
+}
+
+.p-tag.p-tag-danger {
+  @apply bg-red-100 text-red-800;
+}
+
+.p-tag.p-tag-info {
+  @apply bg-blue-100 text-blue-800;
+}
+
+/* Emblemas de prioridade com estilo aprimorado */
+.priority-high {
+  @apply border rounded-full px-3 py-1;
+  background-color: #FFECEA;
+  color: #E5484D;
+  border-color: #FFCDC9;
+}
+
+.priority-medium {
+  @apply border rounded-full px-3 py-1;
+  background-color: #FFF8C5;
+  color: #F59E0B;
+  border-color: #FEF3C7;
+}
+
+.priority-low {
+  @apply border rounded-full px-3 py-1;
+  background-color: var(--primary-color-ultralight);
+  color: var(--primary-color);
+  border-color: var(--primary-color-light);
+}
+
+/* Notificações toast */
+.p-toast {
+  @apply rounded-lg shadow-xl;
+}
+
+.p-toast .p-toast-message {
+  @apply rounded-lg shadow-md border;
+}
+
+.p-toast .p-toast-message-success {
+  @apply bg-green-50 border-green-200 text-green-800;
+}
+
+.p-toast .p-toast-message-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+
+.p-toast .p-toast-message-warn {
+  @apply bg-amber-50 border-amber-200 text-amber-800;
+}
+
+.p-toast .p-toast-message-info {
+  @apply bg-blue-50 border-blue-200 text-blue-800;
+}
+
+/* Estilos de formulários de autenticação */
+.auth-container {
+  @apply flex justify-center items-center min-h-screen p-4;
+  background-color: var(--primary-color-ultralight);
+  width: 100%;
+}
+
+.auth-card {
+  @apply bg-white rounded-xl shadow-xl border p-8 w-full max-w-md;
+  border-color: var(--surface-border);
+}
+
+.auth-title {
+  @apply text-2xl font-bold text-center mb-8;
+  color: var(--text-color);
+}
+
+/* Estilo da página de entrada */
+.welcome-container {
+  @apply flex flex-col items-center justify-center min-h-screen p-6;
+  background-color: var(--primary-color-ultralight);
+  width: 100%;
+}
+
+.welcome-card {
+  @apply max-w-5xl w-full bg-white rounded-2xl shadow-lg border p-10 mb-10;
+  border-color: var(--surface-border);
+}
+
+.welcome-title {
+  @apply text-4xl md:text-5xl font-bold text-center mb-4;
+  color: var(--text-color);
+}
+
+.welcome-subtitle {
+  @apply text-xl text-center mb-12;
+  color: var(--text-color-secondary);
+}
+
+/* Componente de senha */
+.p-password {
+  width: 100% !important;
+  display: flex;
+}
+
+.p-password-input {
+  width: 100% !important;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  height: 46px !important;
+}
+
+/* Grupo de entrada */
+.p-inputgroup {
+  @apply flex w-full;
+}
+
+.p-inputgroup-addon {
+  @apply border px-3 flex items-center text-gray-500;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--input-border);
+}
+
+/* Card de tarefa */
+.task-card {
+  @apply bg-white rounded-xl shadow-sm border p-5 mb-4 hover:shadow-md transition-shadow;
+  border-color: var(--surface-border);
+}
+
+.task-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.task-card-description {
+  @apply mb-4;
+  color: var(--text-color-secondary);
+}
+
+.task-card-footer {
+  @apply flex justify-between items-center pt-4 border-t;
+  border-color: var(--surface-border);
+}
+
+/* Estilo de card */
+.p-card {
+  @apply rounded-xl shadow-md border overflow-hidden;
+  border-color: var(--surface-border);
+  width: 100%;
+}
+
+.p-card .p-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.p-card .p-card-subtitle {
+  @apply text-sm mb-4;
+  color: var(--text-color-secondary);
+}
+
+.p-card .p-card-content {
+  @apply p-4;
+}
+
+.p-card .p-card-footer {
+  @apply p-4 border-t;
+  background-color: var(--primary-color-ultralight);
+  border-color: var(--surface-border);
+}
+
+/* Menu e barra de navegação */
+.p-menubar {
+  @apply bg-white border-b px-4 py-2;
+  border-color: var(--surface-border);
+  width: 100%;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+  @apply text-gray-700 hover:text-indigo-700 px-3 py-2 rounded-md hover:bg-gray-50;
+  border-radius: var(--border-radius);
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+  @apply text-gray-500 mr-2;
+}
+
+/* Cards de recursos na página inicial */
+.feature-card {
+  @apply flex flex-col items-center p-6 border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 bg-white;
+  border-color: var(--surface-border);
+}
+
+.feature-card-icon {
+  @apply text-4xl mb-4;
+  color: var(--primary-color);
+}
+
+.feature-card-title {
+  @apply text-xl font-semibold mb-2;
+  color: var(--text-color);
+}
+
+.feature-card-text {
+  @apply text-center;
+  color: var(--text-color-secondary);
+}
+
+/* Contêiner de aplicativo com espaçamento adequado */
+.app-container {
+  @apply min-h-screen flex flex-col;
+  width: 100%;
+}
+
+.app-content {
+  @apply flex-grow p-5 md:p-8 lg:p-10;
+  width: 100%;
+}
+
+/* Mensagens de erro */
+.p-error {
+  @apply text-red-600 text-sm mt-1;
+}
+
+/* Estilização de checkbox */
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  @apply ring-2 ring-opacity-50 border;
+  border-color: var(--primary-color);
+}
+
+/* Barra de progresso giratória */
+.p-progressspinner {
+  color: var(--primary-color);
+}
+
+/* Correção para componentes PrimeNG */
+.p-component {
+  width: 100% !important;
+}
+
+.p-inputtext,
+.p-password-input,
+.p-inputnumber-input {
+  width: 100% !important;
+}
+
+/* Horizontal tabs */
+.p-tabview .p-tabview-nav {
+  @apply border-b;
+  border-color: var(--surface-border);
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-white text-gray-700 border-b-2 border-transparent py-3 px-4;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Fix for panel display */
+.p-panel-content {
+  padding: 1.25rem !important;
+}
+
+/* Styles for dark theme */
+.dark-theme .app-content {
+  @apply bg-gray-900;
+}
+
+.dark-theme .p-datatable {
+  @apply border-gray-700;
+}
+
+.dark-theme .p-datatable .p-datatable-thead > tr > th {
+  @apply bg-gray-800 text-gray-200 border-gray-700;
+}
+
+.dark-theme .p-datatable .p-datatable-tbody > tr > td {
+  @apply border-gray-700 text-gray-300;
+}
+
+.dark-theme .p-datatable .p-datatable-tbody > tr:hover {
+  @apply bg-gray-800;
+}
+
+/* Utility classes */
+.bg-pattern {
+  background-color: var(--surface-ground);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235151f9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.search-input {
+  @apply py-3 px-4 rounded-lg border w-full transition-all duration-200;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+.search-input:focus {
+  @apply outline-none ring-2 ring-opacity-50;
+  border-color: var(--input-focus-border);
+  ring-color: var(--primary-color);
+}
+
+/* Correções para elementos dentro do diálogo */
+.p-dialog .form-field:last-child {
+  margin-bottom: 0;
+}
+
+/* Ajuste para campos de data com altura consistente */
+.form-field .p-calendar,
+.form-field .p-dropdown,
+.form-field .p-password,
+.form-field .p-inputtext,
+.form-field .p-inputtextarea {
+  width: 100% !important;
+}
+
+/* Ajuste específico para calendário na exibição de tarefas */
+.calendar-dates th {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.calendar-dates td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Botões no calendário mais visíveis */
+.p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-prev:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-next:hover {
+  background-color: var(--primary-color-ultralight);
+}
+
+/* Correções para tela cheia em todos os contêineres */
+.p-component-overlay-enter {
+  animation: none !important;
+}
+
+.p-component-overlay-leave {
+  animation: none !important;
+}
+
+/* Correção de z-index para elementos sobrepostos */
+.p-dialog-mask {
+  z-index: 1100 !important;
+}
+
+.p-dropdown-panel {
+  z-index: 1050 !important;
+}
+
+.p-datepicker {
+  position: absolute !important;
+  z-index: 1050 !important;
+}
+
+/* Fix de registro e login */
+.auth-container form {
+  width: 100%;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card .p-button {
+  width: 100% !important;
+}
+
+/* Evitar que os campos tenham bordas vermelhas quando inativos */
+.p-inputtext.ng-untouched:not(.ng-invalid) {
+  border-color: var(--input-border);
+}
+
+.p-inputtext.ng-dirty.ng-invalid,
+.p-dropdown.ng-dirty.ng-invalid {
+  border-color: #f44336;
+}
+
+/* Corrige componentes dentro do diálogo */
+.p-dialog-content .form-field {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.p-dialog-content .p-dropdown,
+.p-dialog-content .p-inputtext,
+.p-dialog-content .p-calendar,
+.p-dialog-content .p-password,
+.p-dialog-content .p-inputtextarea {
+  width: 100% !important;
+}
+
+/* Solução definitiva para sobreposição de elementos */
+.p-dropdown-panel,
+.p-datepicker,
+.p-component-overlay,
+.p-dialog-mask {
+  z-index: 99999 !important;
+  position: fixed !important;
+}
+
+/* Forçar calendário e dropdown para frente */
+body .p-dropdown-panel {
+  position: fixed !important;
+  z-index: 999999 !important;
+  overflow: visible !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+  border: 1px solid #E2E4F3 !important;
+  min-width: 200px !important;
+  transform: none !important;
+}
+
+body .p-datepicker {
+  position: fixed !important;
+  z-index: 999999 !important;
+  overflow: visible !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+  border: 1px solid #E2E4F3 !important;
+  min-width: 300px !important;
+  transform: none !important;
+}
+
+/* Garantir que os itens de dropdown apareçam */
+body .p-dropdown-items-wrapper {
+  max-height: 250px !important;
+  overflow-y: auto !important;
+}
+
+/* Forçar visibilidade de itens */
+body .p-dropdown-item {
+  display: block !important;
+  visibility: visible !important;
+  position: relative !important;
+  padding: 0.75rem 1rem !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Remover qualquer overflow que possa estar escondendo os elementos */
+body, html, .app-container, .app-content, .p-dialog, .p-dialog-content, .auth-container, 
+.form-field, .p-dropdown, .p-calendar, .p-inputwrapper, 
+.p-card, .p-panel, .p-panel-content {
+  overflow: visible !important;
+}
+
+/* Reset de empilhamento - forçar que elementos pai não limitem z-index */
+* {
+  transform-style: flat !important;
+  backface-visibility: visible !important;
+}
+
+/* Forçar que elementos interativos capturem eventos de clique */
+.p-dropdown-items .p-dropdown-item,
+.p-datepicker table td,
+.p-datepicker-next,
+.p-datepicker-prev,
+.p-datepicker-buttonbar .p-button {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 1000000 !important;
+}
+
+/* Forçar visibilidade total do calendário */
+body .p-datepicker table {
+  width: 100% !important;
+  display: table !important;
+  visibility: visible !important;
+}
+
+body .p-datepicker table td,
+body .p-datepicker table th {
+  text-align: center !important;
+  padding: 0.5rem !important;
+  display: table-cell !important;
+  visibility: visible !important;
+}
+
+/* Garantir cliques em dias do calendário */
+body .p-datepicker table td > span {
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 0.375rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  cursor: pointer !important;
+}
+
+/* FORCING DE POSICIONAMENTO ABSOLUTO */
+.p-dropdown.p-component {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.p-dropdown.p-component.p-focus {
+  z-index: 100000 !important;
+}
+
+/* Impedir que modals ou outros elementos bloqueiem interações */
+.p-dialog-mask {
+  pointer-events: auto !important;
+}
+
+.p-dialog {
+  pointer-events: auto !important;
+  z-index: 1000000 !important;
+}
+
+/* Botões de calendário mais claros */
+.p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next {
+  width: 2rem !important;
+  height: 2rem !important;
+  background-color: var(--primary-color-ultralight) !important;
+  border-radius: 0.375rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 0.25rem !important;
+  cursor: pointer !important;
+}
+
+/* Botões mais visíveis de Today e Clear */
+.p-datepicker-buttonbar .p-button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-color: var(--primary-color) !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem !important;
+  font-weight: bold !important;
+}
+
+/* Forçar estado open do dropdown */
+.p-dropdown-panel-open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Forçar estilos de overlay */
+.p-component-overlay {
+  z-index: 90000 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+/* OVERLAY PARA COMPONENTES EXPANDIDOS */
+body.overlay-active::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  pointer-events: none;
+}
+
+/* Garantir que componentes expandidos fiquem sobre o overlay */
+.p-dropdown-panel.p-component,
+.p-datepicker,
+.p-dialog {
+  z-index: 5001 !important;
+  position: fixed !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
+  background-color: white !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+/* Melhoria visual dos dropdowns */
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.75rem 1.25rem !important;
+  transition: all 0.2s ease !important;
+  border-radius: 4px !important;
+  margin: 2px 5px !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+}
+
+/* Efeitos de hover melhorados */
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background-color: var(--primary-color-ultralight) !important;
+  color: var(--primary-color) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background-color: var(--primary-color-light) !important;
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+}
+
+/* Tamanho fixo para dropdown */
+.p-dropdown-panel {
+  min-width: 200px !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+/* Calendário com melhor visual */
+.p-datepicker {
+  padding: 1rem !important;
+  min-width: 320px !important;
+}
+
+/* Botões do calendário mais destacados */
+.p-datepicker .p-datepicker-header .p-datepicker-title {
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+}
+
+.p-datepicker table td > span:hover {
+  background-color: var(--primary-color-ultralight) !important;
+}
+
+.p-datepicker table td > span.p-highlight {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Botões Today e Clear mais visíveis */
+.p-datepicker-buttonbar {
+  border-top: 1px solid var(--surface-border) !important;
+  padding: 0.75rem 0.5rem 0.25rem 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.p-datepicker-buttonbar .p-button {
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* Animação de entrada e saída mais suaves */
+.p-dropdown-panel,
+.p-datepicker {
+  animation: fadeIn 0.15s ease-out !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Script para adicionar classe de overlay quando componentes são abertos */
+
