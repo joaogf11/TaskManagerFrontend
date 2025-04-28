@@ -1,0 +1,33 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+  <div class="max-w-3xl w-full text-center">
+    <h1 class="text-4xl font-bold mb-4">Welcome to Task Manager</h1>
+    <p class="text-xl mb-8">A simple and efficient way to manage your daily tasks</p>
+    
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex flex-col items-center p-4 border rounded-lg">
+          <i class="pi pi-check-circle text-4xl text-green-500 mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2">Stay Organized</h2>
+          <p class="text-center">Keep track of all your tasks in one place</p>
+        </div>
+        
+        <div class="flex flex-col items-center p-4 border rounded-lg">
+          <i class="pi pi-calendar text-4xl text-blue-500 mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2">Set Due Dates</h2>
+          <p class="text-center">Never miss a deadline with task due dates</p>
+        </div>
+        
+        <div class="flex flex-col items-center p-4 border rounded-lg">
+          <i class="pi pi-flag text-4xl text-red-500 mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2">Prioritize</h2>
+          <p class="text-center">Set priorities to focus on what matters most</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <p-button label="Get Started" icon="pi pi-user-plus" styleClass="p-button-lg" routerLink="/register"></p-button>
+      <p-button label="Login" icon="pi pi-sign-in" styleClass="p-button-outlined p-button-lg" routerLink="/login"></p-button>
+    </div>
+  </div>
+</div>

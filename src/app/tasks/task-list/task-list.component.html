@@ -1,0 +1,100 @@
+<div class="p-4 md:p-6">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">My Tasks</h1>
+    <p-button label="Add Task" icon="pi pi-plus" (onClick)="showAddTaskDialog()"></p-button>
+  </div>
+
+  <div *ngIf="isLoading" class="flex justify-center my-8">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <p-table 
+    *ngIf="!isLoading" 
+    [value]="tasks" 
+    [paginator]="true" 
+    [rows]="10" 
+    [responsive]="true"
+    styleClass="p-datatable-sm"
+    [rowHover]="true"
+    [globalFilterFields]="['title', 'description']"
+    emptyMessage="No tasks found">
+    
+    <ng-template pTemplate="caption">
+      <div class="flex justify-between items-center">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Search tasks..." (input)="applyFilter($event)" />
+        </span>
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+        <th pSortableColumn="priority">Priority <p-sortIcon field="priority"></p-sortIcon></th>
+        <th pSortableColumn="dueDate">Due Date <p-sortIcon field="dueDate"></p-sortIcon></th>
+        <th pSortableColumn="isCompleted">Status <p-sortIcon field="isCompleted"></p-sortIcon></th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>
+          <span [class.line-through]="task.isCompleted">{{ task.title }}</span>
+          <p *ngIf="task.description" class="text-sm text-gray-500 mt-1 truncate max-w-xs">{{ task.description }}</p>
+        </td>
+        <td>
+          <span [ngClass]="{
+            'bg-red-100 text-red-800': task.priority === 2,
+            'bg-yellow-100 text-yellow-800': task.priority === 1,
+            'bg-blue-100 text-blue-800': task.priority === 0
+          }" class="px-2 py-1 rounded-full text-xs font-medium">
+            {{ getPriorityLabel(task.priority) }}
+          </span>
+        </td>
+        <td>
+          <span *ngIf="task.dueDate">{{ task.dueDate | date:'mediumDate' }}</span>
+          <span *ngIf="!task.dueDate">-</span>
+        </td>
+        <td>
+          <p-tag 
+            [value]="task.isCompleted ? 'Completed' : 'Pending'" 
+            [severity]="task.isCompleted ? 'success' : 'warning'">
+          </p-tag>
+        </td>
+        <td>
+          <div class="flex gap-2">
+            <button pButton icon="pi pi-check" class="p-button-rounded p-button-success p-button-sm" 
+              *ngIf="!task.isCompleted"
+              (click)="markAsCompleted(task)"></button>
+            <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-primary p-button-sm" 
+              (click)="editTask(task)"></button>
+            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm" 
+              (click)="confirmDelete(task)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Task Form Dialog -->
+<p-dialog 
+  [(visible)]="displayTaskDialog" 
+  [header]="editMode ? 'Edit Task' : 'Add Task'" 
+  [modal]="true" 
+  [style]="{width: '450px'}"
+  [draggable]="false" 
+  [resizable]="false">
+  
+  <app-task-form 
+    [task]="selectedTask" 
+    [editMode]="editMode"
+    (onSave)="onTaskSaved($event)"
+    (onCancel)="hideDialog()">
+  </app-task-form>
+</p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast></p-toast>

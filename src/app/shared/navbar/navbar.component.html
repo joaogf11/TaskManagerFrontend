@@ -1,0 +1,14 @@
+<p-menubar [model]="items" styleClass="border-b shadow-sm">
+  <ng-template pTemplate="start">
+    <div class="flex items-center">
+      <i class="pi pi-check-square text-xl mr-2"></i>
+      <span class="text-xl font-bold">Task Manager</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div *ngIf="isLoggedIn" class="flex items-center">
+      <span class="mr-2">{{ username }}</span>
+      <p-button icon="pi pi-sign-out" (onClick)="logout()" styleClass="p-button-text"></p-button>
+    </div>
+  </ng-template>
+</p-menubar>

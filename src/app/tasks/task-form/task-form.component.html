@@ -1,0 +1,43 @@
+<form [formGroup]="taskForm" (ngSubmit)="saveTask()" class="p-fluid">
+  <div class="field mb-4">
+    <span class="p-float-label">
+      <input id="title" type="text" pInputText formControlName="title" />
+      <label for="title">Title</label>
+    </span>
+    <small *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="p-error">
+      <div *ngIf="title?.errors?.['required']">Title is required</div>
+      <div *ngIf="title?.errors?.['minlength']">Title must be at least 3 characters</div>
+    </small>
+  </div>
+
+  <div class="field mb-4">
+    <span class="p-float-label">
+      <textarea id="description" pInputTextarea formControlName="description" rows="3"></textarea>
+      <label for="description">Description</label>
+    </span>
+  </div>
+
+  <div class="field mb-4">
+    <span class="p-float-label">
+      <p-dropdown id="priority" [options]="priorityOptions" formControlName="priority" optionLabel="label" optionValue="value"></p-dropdown>
+      <label for="priority">Priority</label>
+    </span>
+  </div>
+
+  <div class="field mb-4">
+    <span class="p-float-label">
+      <p-calendar id="dueDate" formControlName="dueDate" [showIcon]="true" [showButtonBar]="true"></p-calendar>
+      <label for="dueDate">Due Date</label>
+    </span>
+  </div>
+
+  <div *ngIf="editMode" class="field-checkbox mb-4">
+    <p-checkbox formControlName="isCompleted" [binary]="true" inputId="isCompleted"></p-checkbox>
+    <label for="isCompleted" class="ml-2">Mark as completed</label>
+  </div>
+
+  <div class="flex justify-end gap-2">
+    <p-button type="button" label="Cancel" (onClick)="cancel()" styleClass="p-button-text"></p-button>
+    <p-button type="submit" label="Save" [disabled]="taskForm.invalid"></p-button>
+  </div>
+</form>
