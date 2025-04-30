@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { MenuItem } from "primeng/api"
 import { AuthService } from "../../auth/auth.service"
+import { TooltipModule } from "primeng/tooltip"
 
 @Component({
   selector: "app-navbar",

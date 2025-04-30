@@ -1,65 +1,103 @@
-<p-menubar [model]="items" styleClass="shadow-sm border-0 py-2">
+<!-- navbar.component.html - Modern Style -->
+<p-menubar 
+  [model]="items" 
+  styleClass="bg-white shadow-md border-b border-gray-100 py-2 px-4 sm:px-6 fixed top-0 left-0 right-0 z-50"
+>
+  <!-- Logo and Title -->
   <ng-template pTemplate="start">
-    <div class="flex items-center gap-3">
-      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500 shadow-sm">
-        <i class="pi pi-check-square text-xl text-white"></i>
+    <div class="flex items-center gap-3 mr-4 cursor-pointer" routerLink="/">
+      <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-teal-500 to-teal-600 shadow-sm">
+        <i class="pi pi-check-square text-lg text-white"></i>
       </div>
-      <span class="text-xl font-bold text-gray-800 hidden sm:block">Task Manager</span>
+      <span class="text-xl font-semibold text-gray-800 hidden sm:block">TaskManager</span>
     </div>
   </ng-template>
+
+  <!-- Navigation Items (Managed by [model]) -->
+  <ng-template pTemplate="item" let-item let-root="root">
+    <a 
+      *ngIf="item.routerLink" 
+      [routerLink]="item.routerLink" 
+      routerLinkActive="bg-teal-50 text-teal-700" 
+      [routerLinkActiveOptions]="{exact: item.routerLink === '/'}"
+      class="flex items-center p-3 rounded-md cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-100"
+      [attr.target]="item.target"
+      [attr.tabindex]="-1"
+      pRipple
+    >
+      <i [class]="item.icon + ' text-gray-600 mr-2'"></i>
+      <span class="text-gray-700 font-medium">{{ item.label }}</span>
+    </a>
+  </ng-template>
+
+  <!-- Right-aligned Actions -->
   <ng-template pTemplate="end">
-    <div *ngIf="isLoggedIn" class="flex items-center gap-3">
-      <!-- User info button -->
+    <!-- Logged In State -->
+    <div *ngIf="isLoggedIn" class="flex items-center gap-2 sm:gap-3">
+      <!-- User Info Button (Optional: Could be a dropdown menu) -->
       <button pButton pRipple type="button" 
-        class="p-button-text p-button-rounded flex items-center gap-2" 
-        >
-        <div class="flex items-center gap-2 bg-indigo-50 py-1.5 px-3 rounded-full text-sm text-indigo-700 font-medium">
+        class="p-button-text p-button-rounded flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+        pTooltip="{{username}}"
+        tooltipPosition="bottom"
+      >
+        <div class="flex items-center gap-2 bg-teal-50 py-1.5 px-3 rounded-full text-sm text-teal-700 font-medium border border-teal-100">
           <i class="pi pi-user"></i>
-          <span class="hidden sm:inline">{{ username }}</span>
+          <span class="hidden md:inline">{{ username }}</span>
         </div>
       </button>
       
-      <!-- Notifications -->
+      <!-- Notifications (Example) -->
       <button pButton pRipple type="button" 
         icon="pi pi-bell" 
-        class="p-button-rounded p-button-text relative"
+        class="p-button-rounded p-button-text text-gray-500 hover:text-teal-600 hover:bg-teal-50 relative focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         pTooltip="Notificações" 
         tooltipPosition="bottom">
-        <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+        <!-- Example badge -->
+        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span> 
       </button>
       
-      <!-- Settings -->
+      <!-- Settings (Example) -->
       <button pButton pRipple type="button" 
         icon="pi pi-cog" 
-        class="p-button-rounded p-button-text"
+        class="p-button-rounded p-button-text text-gray-500 hover:text-teal-600 hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         pTooltip="Configurações" 
         tooltipPosition="bottom">
       </button>
       
-      <!-- Logout button -->
+      <!-- Logout Button -->
       <button pButton pRipple type="button" 
         icon="pi pi-sign-out" 
-        class="p-button-rounded p-button-danger p-button-text"
+        class="p-button-rounded p-button-danger p-button-text text-red-500 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         pTooltip="Sair" 
         tooltipPosition="bottom"
         (click)="logout()">
       </button>
     </div>
     
-    <!-- Login/Register buttons if not logged in -->
+    <!-- Logged Out State -->
     <div *ngIf="!isLoggedIn" class="flex items-center gap-2">
-      <p-button 
+      <button 
+        pButton 
+        pRipple
         label="Entrar" 
         icon="pi pi-sign-in" 
-        styleClass="p-button-sm p-button-text"
+        class="p-button-text text-teal-600 hover:bg-teal-50 font-medium"
         routerLink="/login">
-      </p-button>
-      <p-button 
-        label="Registrar" 
+      </button>
+      <button 
+        pButton 
+        pRipple
+        label="Registrar"
         icon="pi pi-user-plus" 
-        styleClass="p-button-sm"
+        class="p-button-primary bg-teal-600 hover:bg-teal-700 border-teal-600 hover:border-teal-700 text-white font-semibold py-2 px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-150 ease-in-out"
         routerLink="/register">
-      </p-button>
+      </button>
     </div>
   </ng-template>
 </p-menubar>
+
+<!-- Add padding to the body to prevent content from being hidden behind the fixed navbar -->
+<div class="pt-16"> <!-- Adjust height based on navbar height -->
+  <router-outlet></router-outlet>
+</div>
+

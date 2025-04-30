@@ -1,75 +1,94 @@
-<!-- Login Form -->
-<div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-primary-50 to-primary-100 p-6">
-  <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md border border-primary-200">
+<!-- login.component.html - Modern Style -->
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 p-4 sm:p-6">
+  <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-md border border-teal-100">
     <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold text-gray-800">Entrar</h2>
-      <p class="text-gray-600 mt-2">Acesse sua conta para gerenciar suas tarefas</p>
+      <h2 class="text-3xl font-bold text-teal-700">Entrar</h2>
+      <p class="text-gray-600 mt-2">Acesse sua conta para continuar</p>
     </div>
     
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Email Field -->
       <div class="space-y-1">
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-        <div class="relative">
-          <i class="pi pi-envelope absolute text-gray-400 top-1/2 left-3 transform -translate-y-1/2"></i>
+        <div class="relative rounded-lg shadow-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-envelope text-gray-400"></i>
+          </div>
           <input 
             id="email" 
             type="email" 
             pInputText 
             formControlName="email" 
-            class="w-full pl-10 rounded-lg" 
+            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition duration-150 ease-in-out"
             placeholder="seu@email.com"
           />
         </div>
-        <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="p-error text-sm">
-          <div *ngIf="email?.errors?.['required']">Email é obrigatório</div>
-          <div *ngIf="email?.errors?.['email']">Por favor, insira um email válido</div>
+        <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-red-600 text-xs block mt-1">
+          <span *ngIf="email?.errors?.['required']">Email é obrigatório.</span>
+          <span *ngIf="email?.errors?.['email']">Por favor, insira um email válido.</span>
         </small>
       </div>
 
+      <!-- Password Field -->
       <div class="space-y-1">
         <div class="flex justify-between items-center mb-1">
           <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-          <a href="#" class="text-xs text-primary hover:underline">Esqueceu a senha?</a>
+          <a href="#" class="text-xs text-teal-600 hover:text-teal-700 hover:underline font-medium">Esqueceu a senha?</a>
         </div>
         <div class="relative">
-          <i class="pi pi-lock absolute text-gray-400 top-1/2 left-3 transform -translate-y-1/2 z-10"></i>
           <p-password 
             id="password" 
             formControlName="password" 
             [feedback]="false" 
             [toggleMask]="true" 
-            styleClass="w-full" 
-            [inputStyleClass]="'pl-10 w-full rounded-lg'"
+            styleClass="w-full p-password-modern" 
+            inputStyleClass="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition duration-150 ease-in-out"
             placeholder="Sua senha"
-          ></p-password>
+            promptLabel="Digite uma senha"
+            weakLabel="Fraca"
+            mediumLabel="Média"
+            strongLabel="Forte"
+          >
+            <ng-template pTemplate="header">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                <i class="pi pi-lock text-gray-400"></i>
+              </div>
+            </ng-template>
+          </p-password>
         </div>
-        <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="p-error text-sm">
-          <div *ngIf="password?.errors?.['required']">Senha é obrigatória</div>
+        <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-red-600 text-xs block mt-1">
+          <span *ngIf="password?.errors?.['required']">Senha é obrigatória.</span>
         </small>
       </div>
     
+      <!-- Submit Button -->
       <div class="pt-4">
         <button 
           pButton 
           type="submit" 
-          label="Entrar" 
+          label="Entrar"
           icon="pi pi-sign-in" 
           iconPos="left"
-          class="w-full p-button-primary p-button-raised p-button-lg" 
+          class="w-full p-button-primary bg-teal-600 hover:bg-teal-700 border-teal-600 hover:border-teal-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-150 ease-in-out flex items-center justify-center gap-2"
           [disabled]="loginForm.invalid || isLoading"
-        ></button>
+        >
+          <p-progressSpinner *ngIf="isLoading" [style]="{width: '20px', height: '20px'}" strokeWidth="6" styleClass="custom-spinner"></p-progressSpinner>
+        </button>
       </div>
       
-      <div class="text-center pt-4">
-        <p class="text-gray-600">
+      <!-- Link to Register -->
+      <div class="text-center pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-600">
           Não tem uma conta? 
-          <a routerLink="/register" class="text-primary font-medium hover:underline">Registre-se</a>
+          <a routerLink="/register" class="font-medium text-teal-600 hover:text-teal-700 hover:underline">Registre-se aqui</a>
         </p>
       </div>
     </form>
 
-    <div *ngIf="isLoading" class="flex justify-center mt-8">
-      <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
-    </div>
+    <!-- Loading Indicator (Alternative if button spinner isn't enough) -->
+    <!-- <div *ngIf="isLoading" class="flex justify-center mt-6">
+      <p-progressSpinner [style]="{width: '40px', height: '40px'}" strokeWidth="4"></p-progressSpinner>
+    </div> -->
   </div>
 </div>
+

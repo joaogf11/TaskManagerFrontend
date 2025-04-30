@@ -1,64 +1,76 @@
-<div class="welcome-container min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 py-12 px-6">
-  <div class="welcome-card max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12">
-    <div class="text-center mb-10">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bem-vindo ao Task Manager</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">A forma mais simples e eficiente de gerenciar suas tarefas diárias</p>
+<!-- home.component.html - Modern Style -->
+<div class="min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 py-12 px-4 sm:px-6">
+  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-teal-100">
+    <!-- Header Section -->
+    <div class="text-center mb-10 md:mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-teal-700 mb-4">Bem-vindo ao TaskManager</h1>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">A forma mais simples e eficiente de organizar seu dia e alcançar seus objetivos.</p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-      <div class="feature-card bg-indigo-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+    <!-- Features Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+      <!-- Feature Card 1: Organize -->
+      <div class="feature-card bg-teal-50 rounded-xl p-6 text-center border border-teal-100 hover:shadow-lg hover:border-teal-200 transition-all duration-200">
         <div class="flex justify-center mb-4">
-          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
-            <i class="pi pi-check-circle text-2xl text-indigo-600"></i>
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center border border-teal-200">
+            <i class="pi pi-check-circle text-3xl text-teal-600"></i>
           </div>
         </div>
-        <h2 class="text-xl font-bold text-gray-800 mb-2">Fique Organizado</h2>
-        <p class="text-gray-600">Mantenha todas as suas tarefas organizadas em um só lugar com facilidade e praticidade</p>
+        <h2 class="text-xl font-semibold text-teal-800 mb-2">Organize Tudo</h2>
+        <p class="text-gray-700 text-sm">Mantenha suas tarefas, projetos e notas em um só lugar, acessível de qualquer dispositivo.</p>
       </div>
       
-      <div class="feature-card bg-blue-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+      <!-- Feature Card 2: Deadlines -->
+      <div class="feature-card bg-teal-50 rounded-xl p-6 text-center border border-teal-100 hover:shadow-lg hover:border-teal-200 transition-all duration-200">
         <div class="flex justify-center mb-4">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-            <i class="pi pi-calendar text-2xl text-blue-600"></i>
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center border border-teal-200">
+            <i class="pi pi-calendar-times text-3xl text-teal-600"></i>
           </div>
         </div>
-        <h2 class="text-xl font-bold text-gray-800 mb-2">Defina Prazos</h2>
-        <p class="text-gray-600">Nunca mais perca um prazo com datas de vencimento claras e notificações</p>
+        <h2 class="text-xl font-semibold text-teal-800 mb-2">Cumpra Prazos</h2>
+        <p class="text-gray-700 text-sm">Defina datas de vencimento e receba lembretes para nunca mais perder um prazo importante.</p>
       </div>
       
-      <div class="feature-card bg-purple-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
+      <!-- Feature Card 3: Prioritize -->
+      <div class="feature-card bg-teal-50 rounded-xl p-6 text-center border border-teal-100 hover:shadow-lg hover:border-teal-200 transition-all duration-200">
         <div class="flex justify-center mb-4">
-          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-            <i class="pi pi-flag text-2xl text-purple-600"></i>
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center border border-teal-200">
+            <i class="pi pi-flag-fill text-3xl text-teal-600"></i>
           </div>
         </div>
-        <h2 class="text-xl font-bold text-gray-800 mb-2">Priorize</h2>
-        <p class="text-gray-600">Defina prioridades para focar no que realmente importa e aumente sua produtividade</p>
+        <h2 class="text-xl font-semibold text-teal-800 mb-2">Priorize o Essencial</h2>
+        <p class="text-gray-700 text-sm">Use níveis de prioridade para focar no que realmente importa e maximizar sua produtividade.</p>
       </div>
     </div>
     
-    <div class="flex flex-col sm:flex-row gap-5 justify-center">
-      <p-button 
-        label="Começar Agora" 
+    <!-- Call to Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+      <button 
+        pButton 
+        pRipple
+        label="Criar Conta Grátis"
         icon="pi pi-user-plus" 
-        styleClass="p-button-lg p-button-raised" 
+        class="p-button-primary p-button-lg bg-teal-600 hover:bg-teal-700 border-teal-600 hover:border-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-150 ease-in-out"
         routerLink="/register">
-      </p-button>
-      <p-button 
-        label="Entrar" 
+      </button>
+      <button 
+        pButton 
+        pRipple
+        label="Já Tenho Conta"
         icon="pi pi-sign-in" 
-        styleClass="p-button-outlined p-button-lg" 
+        class="p-button-secondary p-button-lg p-button-outlined border-teal-500 text-teal-600 hover:bg-teal-50 font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-150 ease-in-out"
         routerLink="/login">
-      </p-button>
+      </button>
     </div>
     
-    <!-- Added testimonial section -->
-    <div class="mt-16 pt-8 border-t border-gray-100">
-      <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">O que nossos usuários dizem</h3>
+    <!-- Testimonial Section -->
+    <div class="pt-10 border-t border-teal-100">
+      <h3 class="text-2xl md:text-3xl font-semibold text-center text-teal-700 mb-8">O que nossos usuários dizem</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <div class="flex items-center mb-4">
-            <div class="text-amber-500 flex">
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <div class="flex items-center mb-3">
+            <div class="text-amber-500 flex text-lg">
               <i class="pi pi-star-fill"></i>
               <i class="pi pi-star-fill"></i>
               <i class="pi pi-star-fill"></i>
@@ -66,12 +78,14 @@
               <i class="pi pi-star-fill"></i>
             </div>
           </div>
-          <p class="italic text-gray-600 mb-4">"Este aplicativo simplificou completamente minha rotina diária. Agora consigo acompanhar todas as minhas tarefas sem estresse."</p>
-          <p class="font-medium">Carlos Silva</p>
+          <p class="italic text-gray-700 mb-4">"Este aplicativo simplificou completamente minha rotina diária. Agora consigo acompanhar todas as minhas tarefas sem estresse e com muito mais clareza."</p>
+          <p class="font-semibold text-gray-800">Carlos Silva</p>
+          <p class="text-sm text-gray-500">Desenvolvedor Web</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <div class="flex items-center mb-4">
-            <div class="text-amber-500 flex">
+        <!-- Testimonial 2 -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <div class="flex items-center mb-3">
+            <div class="text-amber-500 flex text-lg">
               <i class="pi pi-star-fill"></i>
               <i class="pi pi-star-fill"></i>
               <i class="pi pi-star-fill"></i>
@@ -79,10 +93,12 @@
               <i class="pi pi-star-fill"></i>
             </div>
           </div>
-          <p class="italic text-gray-600 mb-4">"A melhor ferramenta de gerenciamento de tarefas que já usei. Interface intuitiva e recursos poderosos!"</p>
-          <p class="font-medium">Ana Oliveira</p>
+          <p class="italic text-gray-700 mb-4">"A melhor ferramenta de gerenciamento de tarefas que já usei. A interface é intuitiva, moderna e os recursos são poderosos! Recomendo!"</p>
+          <p class="font-semibold text-gray-800">Ana Oliveira</p>
+          <p class="text-sm text-gray-500">Gerente de Projetos</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+

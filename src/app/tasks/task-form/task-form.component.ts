@@ -50,6 +50,13 @@ export class TaskFormComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ngAfterViewInit(): void {
+    // Corrigir o calendário
+    setTimeout(() => {
+      const datepickers = document.querySelectorAll('.p-datepicker');
+      datepickers.forEach((dp: any) => {
+        dp.style.zIndex = '9999';
+      });
+    }, 0);
     
     this.clickListener = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -168,5 +175,17 @@ export class TaskFormComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
   cancel(): void {
     this.onCancel.emit();
+  }
+
+  activateEditMode(): void {
+    if (!this.editMode && this.task) {
+      // Se temos uma tarefa mas não estamos em modo de edição, ative-o
+      this.editMode = true;
+    }
+  }
+
+  toggleTaskCompletion(): void {
+    const currentValue = this.taskForm.get('isCompleted')?.value;
+    this.taskForm.get('isCompleted')?.setValue(!currentValue);
   }
 }

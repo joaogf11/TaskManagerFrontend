@@ -1,63 +1,156 @@
-<!-- Lista de cards de tarefas -->
-<div *ngIf="!isLoading && tasks.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-  <div *ngFor="let task of tasks" class="task-card bg-surface-card rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 p-5">
-    <div class="flex justify-between mb-3">
-      <span [ngClass]="{
-        'bg-red-100 text-red-700': task.priority === 2,
-        'bg-amber-100 text-amber-700': task.priority === 1,
-        'bg-blue-100 text-blue-700': task.priority === 0
-      }" class="text-xs font-medium py-1 px-2.5 rounded-full">
-        {{ getPriorityLabel(task.priority) }}
+<!-- task-list.component.html - Modern Style -->
+<div class="p-4 sm:p-6 bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 sm:mb-0">Minhas Tarefas</h2>
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <!-- Search Input -->
+      <span class="p-input-icon-left w-full sm:w-auto">
+        <i class="pi pi-search text-gray-400"></i>
+        <input 
+          type="text" 
+          pInputText 
+          (input)="applyFilter($event)" 
+          placeholder="Buscar tarefas..." 
+          class="w-full rounded-lg shadow-sm border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+        />
       </span>
-      <p-tag 
-        [value]="task.isCompleted ? 'Concluída' : 'Pendente'" 
-        [severity]="task.isCompleted ? 'success' : 'warn'">
-      </p-tag>
-    </div>
-    
-    <h3 class="text-lg font-semibold mb-2" [class.line-through]="task.isCompleted" [class.text-gray-500]="task.isCompleted">
-      {{ task.title }}
-    </h3>
-    
-    <p *ngIf="task.description" class="text-gray-600 mb-4 text-sm line-clamp-3">
-      {{ task.description }}
-    </p>
-    
-    <div *ngIf="task.dueDate" class="flex items-center mb-4 text-gray-500 text-sm">
-      <i class="pi pi-calendar mr-2"></i>
-      <span>{{ task.dueDate | date:'longDate' }}</span>
-    </div>
-    
-    <!-- Improved task card footer with better action buttons -->
-    <div class="flex justify-between items-center pt-3 mt-2 border-t border-gray-100">
-      <div class="flex gap-2">
-        <button 
-          pButton 
-          icon="pi pi-check" 
-          class="p-button-rounded p-button-success p-button-sm" 
-          *ngIf="!task.isCompleted"
-          pTooltip="Marcar como concluída"
-          (click)="markAsCompleted(task)">
-        </button>
-        <button 
-          pButton 
-          icon="pi pi-pencil" 
-          class="p-button-rounded p-button-primary p-button-sm" 
-          pTooltip="Editar tarefa"
-          (click)="editTask(task)">
-        </button>
-        <button 
-          pButton 
-          icon="pi pi-trash" 
-          class="p-button-rounded p-button-danger p-button-sm" 
-          pTooltip="Excluir tarefa"
-          (click)="confirmDelete(task)">
-        </button>
-      </div>
-      <span *ngIf="task.isCompleted" class="flex items-center gap-1 text-green-600 text-xs font-medium">
-        <i class="pi pi-check-circle"></i>
-        Concluída
-      </span>
+      <!-- Add Task Button -->
+      <button 
+        pButton 
+        pRipple 
+        label="Nova Tarefa" 
+        icon="pi pi-plus" 
+        class="p-button-primary bg-teal-600 hover:bg-teal-700 border-teal-600 hover:border-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition duration-150 ease-in-out whitespace-nowrap"
+        (click)="showAddTaskDialog()"
+      ></button>
     </div>
   </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="flex justify-center items-center py-10">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="4"></p-progressSpinner>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && tasks.length === 0" class="text-center py-10 bg-white rounded-xl shadow-sm border border-gray-100">
+    <i class="pi pi-inbox text-5xl text-gray-400 mb-4"></i>
+    <p class="text-gray-600">Nenhuma tarefa encontrada.</p>
+    <p class="text-gray-500 text-sm mt-1">Crie sua primeira tarefa clicando em "Nova Tarefa".</p>
+  </div>
+
+  <!-- Task Cards Grid -->
+  <div *ngIf="!isLoading && tasks.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div *ngFor="let task of tasks" 
+         class="task-card bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 p-5 flex flex-col justify-between cursor-pointer"
+         [class.opacity-60]="task.isCompleted"
+         (click)="onCardClick(task)">
+      
+      <!-- Card Header: Priority and Status -->
+      <div class="flex justify-between items-start mb-3">
+        <span 
+          class="text-xs font-semibold py-1 px-3 rounded-full capitalize"
+          [ngClass]="{
+            'bg-red-100 text-red-700 border border-red-200': task.priority === 2, 
+            'bg-amber-100 text-amber-700 border border-amber-200': task.priority === 1, 
+            'bg-blue-100 text-blue-700 border border-blue-200': task.priority === 0 
+          }"
+        >
+          {{ getPriorityLabel(task.priority) }}
+        </span>
+        <p-tag 
+          [value]="task.isCompleted ? 'Concluída' : 'Pendente'" 
+          [severity]="task.isCompleted ? 'success' : 'warn'"
+          styleClass="text-xs font-medium"
+          [icon]="task.isCompleted ? 'pi pi-check-circle' : 'pi pi-clock'"
+        >
+        </p-tag>
+      </div>
+      
+      <!-- Card Body: Title and Description -->
+      <div class="flex-grow mb-4">
+        <h3 
+          class="text-lg font-semibold mb-2 text-gray-800 break-words"
+          [class.line-through]="task.isCompleted"
+          [class.text-gray-500]="task.isCompleted"
+        >
+          {{ task.title }}
+        </h3>
+        <p *ngIf="task.description" class="text-gray-600 text-sm line-clamp-3 break-words">
+          {{ task.description }}
+        </p>
+      </div>
+      
+      <!-- Card Footer: Due Date and Actions -->
+      <div class="mt-auto">
+        <div *ngIf="task.dueDate" class="flex items-center mb-4 text-gray-500 text-xs">
+          <i class="pi pi-calendar mr-2"></i>
+          <span>Vence em: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+        </div>
+        
+        <div class="flex justify-end items-center pt-3 border-t border-gray-100 gap-2">
+          <!-- Mark as Completed Button -->
+          <button 
+            *ngIf="!task.isCompleted"
+            pButton 
+            pRipple
+            icon="pi pi-check"
+            class="p-button-rounded p-button-success p-button-text p-button-sm"
+            pTooltip="Marcar como concluída"
+            tooltipPosition="top"
+            (click)="markAsCompleted(task, $event)">
+          </button>
+          <!-- Edit Button -->
+          <button 
+            pButton 
+            pRipple
+            icon="pi pi-pencil" 
+            class="p-button-rounded p-button-secondary p-button-text p-button-sm"
+            pTooltip="Editar tarefa"
+            tooltipPosition="top"
+            (click)="editTask(task, $event)">
+          </button>
+          <!-- Delete Button -->
+          <button 
+            pButton 
+            pRipple
+            icon="pi pi-trash" 
+            class="p-button-rounded p-button-danger p-button-text p-button-sm"
+            pTooltip="Excluir tarefa"
+            tooltipPosition="top"
+            (click)="confirmDelete(task, $event)">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Form Dialog -->
+  <p-dialog 
+    [(visible)]="displayTaskDialog" 
+    [modal]="true" 
+    [style]="{width: '90%', maxWidth: '600px'}" 
+    [draggable]="false" 
+    [resizable]="false"
+    [header]="editMode ? 'Editar Tarefa' : 'Nova Tarefa'"
+    styleClass="p-dialog-modern"
+    (onHide)="hideDialog()"
+  >
+    <app-task-form 
+      [task]="selectedTask" 
+      [editMode]="editMode" 
+      (onSave)="onTaskSaved($event)" 
+      (onCancel)="hideDialog()"
+    ></app-task-form>
+  </p-dialog>
+
+  <!-- Confirmation Dialog -->
+  <p-confirmDialog 
+    icon="pi pi-exclamation-triangle"
+    acceptLabel="Sim, excluir"
+    rejectLabel="Cancelar"
+    acceptButtonStyleClass="p-button-danger"
+    rejectButtonStyleClass="p-button-text"
+  ></p-confirmDialog>
 </div>
+

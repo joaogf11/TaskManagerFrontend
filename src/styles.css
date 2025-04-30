@@ -718,7 +718,7 @@ body {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--input-border);
-  z-index: 999 !important;
+  z-index: 1051 !important;
 }
 
 .p-datepicker .p-datepicker-header {
@@ -1160,7 +1160,7 @@ body {
 
 /* Correção de z-index para elementos sobrepostos */
 .p-dialog-mask {
-  z-index: 1100 !important;
+  z-index: 1050;
 }
 
 .p-dropdown-panel {
@@ -1169,7 +1169,7 @@ body {
 
 .p-datepicker {
   position: absolute !important;
-  z-index: 1050 !important;
+  z-index: 1051 !important;
 }
 
 /* Fix de registro e login */

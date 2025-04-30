@@ -49,7 +49,11 @@ export class TaskListComponent implements OnInit {
     this.displayTaskDialog = true
   }
 
-  editTask(task: Task): void {
+  editTask(task: Task, event?: Event): void {
+    if (event) {
+      // Evitar que o clique se propague para o card
+      event.stopPropagation();
+    }
     this.selectedTask = { ...task }
     this.editMode = true
     this.displayTaskDialog = true
@@ -64,7 +68,17 @@ export class TaskListComponent implements OnInit {
     this.loadTasks()
   }
 
-  markAsCompleted(task: Task): void {
+  onCardClick(task: Task): void {
+    // Abre o formulário de edição quando o card é clicado
+    this.editTask(task);
+  }
+
+  markAsCompleted(task: Task, event?: Event): void {
+    if (event) {
+      // Evitar que o clique se propague para o card
+      event.stopPropagation();
+    }
+    
     const updatedTask = {
       ...task,
       isCompleted: true,
@@ -91,7 +105,12 @@ export class TaskListComponent implements OnInit {
     })
   }
 
-  confirmDelete(task: Task): void {
+  confirmDelete(task: Task, event?: Event): void {
+    if (event) {
+      // Evitar que o clique se propague para o card
+      event.stopPropagation();
+    }
+    
     this.confirmationService.confirm({
       message: `Are you sure you want to delete the task "${task.title}"?`,
       accept: () => {

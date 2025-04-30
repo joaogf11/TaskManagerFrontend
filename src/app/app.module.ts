@@ -22,6 +22,7 @@ import { CheckboxModule } from "primeng/checkbox"
 import { MenubarModule } from "primeng/menubar"
 import { ProgressSpinnerModule } from "primeng/progressspinner"
 import { TagModule } from "primeng/tag"
+import { TooltipModule } from "primeng/tooltip"
 
 // Components
 import { AppComponent } from "./app.component"
@@ -70,6 +71,7 @@ import { AppRoutingModule } from "./app-routing.module"
     MenubarModule,
     ProgressSpinnerModule,
     TagModule,
+    TooltipModule,
   ],
   providers: [
     MessageService,
